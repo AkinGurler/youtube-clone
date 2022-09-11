@@ -13,18 +13,15 @@ const Navbar = () => (
       top: 0,
        justifyContent: "space-between" 
     }}>
-    <Stack direction ="row">
       <Link to="/" style={{ display: "flex", alignItems: "center" }}>
         <img src={logo} alt="logo" height={45} ></img>
-      </Link>
-      <Typography sx={{ color: "white", fontWeight: 800, fontSize: 25 }}>
+        <Typography sx={{ color: "white", fontWeight: 800, fontSize: 25 }}>
         Ourtube
       </Typography>
-    </Stack>
+      </Link>
+    
 
-    <Stack>
     <SearchBar />
-    </Stack>
     
 
   </Stack>
