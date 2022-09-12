@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Box,Stack,Typography} from "@mui/material"
 import Sidebar from './SideBar'
 import { VideoSettings } from '@mui/icons-material'
 import Videos from './Videos'
+import { fetchFromAPI } from '../utils/fetchFromAPI'
+import { useState } from 'react'
 
 const Feed = () => {
+  const [selectedCategory, setSelectedCategory] = useState("New")
+  const [videos, setVideos] = useState([])
+  useEffect(() => {
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
+    /*we call this func and it returns a promise succesfull return .then()*/
+    /* we cant say const data because it returns promise */
+      .then((data)=>setVideos(data.items))
+  }, [selectedCategory])
+  
   return (
    <Stack sx={{
     flexDirection:{sx:"column",md:"row"} //medium devices row//
@@ -14,7 +25,8 @@ const Feed = () => {
       borderRight:"1px solid #3d3d3d",
       px:{sx:0,md:2}
     }}>
-      <Sidebar/>
+      <Sidebar selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}/>
       <Typography className='copyright' variant='body2'
       sx={{mt:1.5,color:"white"}}>
         Copyright 2022 Akın
@@ -25,11 +37,11 @@ const Feed = () => {
       height:"90vh", flex:2
       }}>
       <Typography variant='h4' mt={1} sx={{color:"white",fontWeight:"bold"}}>
-        New <span style={{color:"#F31503"}}>
+        {selectedCategory} <span style={{color:"#F31503"}}>
           videos  
         </span>
       </Typography>
-      <Videos/>
+      <Videos videos={videos}/>
 
     </Box>
    </Stack>
