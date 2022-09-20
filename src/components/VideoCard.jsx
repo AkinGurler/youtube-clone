@@ -4,7 +4,6 @@ import { Typography,Button, Card, CardContent, CardMedia } from "@mui/material"
 import { demoThumbnailUrl, demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle } from "../utils/constants";
 
 const VideoCard = ({ video: { id: { videoId }, snippet } }) => { //video/id/videoId
-    console.log(videoId, snippet)
     const channelId=snippet?.channelId
     return (
         <Card sx={{
