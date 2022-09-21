@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 import {Paper,IconButton} from "@mui/material"
 import YoutubeSearchedForIcon from '@mui/icons-material/YoutubeSearchedFor';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
+  const [search, setSearch] = useState("")
+  const handleSearch=(event)=>setSearch(event.target.value)
+
+  const navigate=useNavigate()
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    if(search) {
+      navigate(`/search/${search}`)
+      setSearch("")
+    }
+  }
+
   return (
     <Paper component="form"
-    onSubmit={()=>{}}
+    onSubmit={handleSubmit}
     sx={{
         borderRadius:20,
         border:"1px solid #e3e3e3",
@@ -17,8 +31,8 @@ const SearchBar = () => {
        <input 
         className='search-bar'
         placeholder="Watch.."
-        value=""
-        onChange={()=>{}}
+        value={search}
+        onChange={handleSearch}
        />
        <IconButton type="submit" sx={{
         p:"10px",
