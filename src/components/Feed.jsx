@@ -34,7 +34,9 @@ const Feed = () => {
     </Box>
     <Box p={2} sx={{
       overflowY:"auto",
-      height:"90vh", flex:2
+      height:"90vh", flex:2,
+      justifyItems:"center"
+
       }}>
       <Typography variant='h4' mt={1} sx={{color:"white",fontWeight:"bold"}}>
         {selectedCategory} <span style={{color:"#F31503"}}>

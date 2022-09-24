@@ -22,7 +22,7 @@ return (
     <Link to={`channel/${channelDetail?.id?.channelId}`}>
     <CardContent sx={{
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column",/////
       justifyContent: "center",
       textAlign: "center",
       color: "#fff"
