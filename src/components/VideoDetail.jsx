@@ -6,23 +6,24 @@ import { Videos } from "./"
 import { fetchFromAPI } from '../utils/fetchFromAPI'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { getSuggestedVideos, getVideoDetail } from '../actions/video'
+import {useDispatch,useSelector} from "react-redux"
 
 
 const VideoDetail = () => {
-  const [videoDetail, setVideoDetail] = useState([])
-  const [videos, setVideos] = useState([])
   const { id } = useParams();
+  const dispatch=useDispatch();
+  const videoDetail=useSelector((state)=>state.videoDetails)
+  const videos=useSelector((state)=>state.suggestedVideos)
 
-  console.log(videos)
 
+ 
   useEffect(() => {
-    fetchFromAPI(`videos?part=snippet&id=${id}`)
-      .then((data) => setVideoDetail(data.items[0]))
-
-    fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
-      .then((data) => setVideos(data.items))
-
+    dispatch(getVideoDetail(id))
+    dispatch(getSuggestedVideos(id))
+  
   }, [id])
+  
 
   if (!videoDetail?.snippet) return "Loading..."
   const { snippet: { channelTitle, title, channelId }, statistics: { likeCount, viewCount, commentCount } } = videoDetail

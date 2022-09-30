@@ -5,15 +5,17 @@ import { VideoSettings } from '@mui/icons-material'
 import Videos from './Videos'
 import { fetchFromAPI } from '../utils/fetchFromAPI'
 import { useState } from 'react'
+import { getVideosByCategory } from '../actions/video'
+import {useDispatch,useSelector} from "react-redux"
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New")
-  const [videos, setVideos] = useState([])
+
+  const videos=useSelector((state)=>state.videosBycategory)
+  const dispatch=useDispatch()
+
   useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
-    /*we call this func and it returns a promise succesfull return .then()*/
-    /* we cant say const data because it returns promise */
-      .then((data)=>setVideos(data.items))
+    dispatch(getVideosByCategory(selectedCategory))
   }, [selectedCategory])
   
   return (
