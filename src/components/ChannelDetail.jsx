@@ -4,19 +4,30 @@ import {Box} from "@mui/material"
 
 import {Videos,ChannelCard} from "./"
 import { fetchFromAPI } from '../utils/fetchFromAPI'
+import { useDispatch, useSelector } from 'react-redux'
+import { getChannelDetails, getChannelVideos } from '../actions/channel'
 
 const ChannelDetail = () => {
-  const [channelDetail, setChannelDetail] = useState(null)
-  const [videos, setVideos] = useState([])
+  /* const [channelDetail, setChannelDetail] = useState(null) */
+ 
+  const {id}=useParams()
+  const dispatch=useDispatch()
+  const channelDetail=useSelector((state)=>state.channelDetails)
+  const videos=useSelector((state)=>state.channelVideos)
+
+  useEffect(() => {
+    dispatch(getChannelDetails(id))
+    dispatch(getChannelVideos(id))
+  }, [id])
+  
 
  
 
-  const {id}=useParams()
-
+  
+/* 
   useEffect(() => { 
     const fetchResults=async()=>{
-      const data=await fetchFromAPI(`channels?part=snippet&id=${id}`)
-      setChannelDetail(data.items[0])
+  
   
       const channelVideos=await fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`)
       setVideos(channelVideos.items)
@@ -24,7 +35,7 @@ const ChannelDetail = () => {
     fetchResults()
   }, [id])
   
-
+ */
   return (
     <Box minHeight="95vh">
       <Box>

@@ -6,13 +6,24 @@ import Videos from './Videos'
 import { fetchFromAPI } from '../utils/fetchFromAPI'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSearchVideos } from '../actions/video'
 
 const Feed = () => {
  
  
   const {searchTerm}=useParams()
 
-  const [videos, setVideos] = useState([])
+ 
+  const dispatch=useDispatch()
+  const videos=useSelector((state)=>state.searchVideos)
+  
+  useEffect(() => {
+    dispatch(getSearchVideos(searchTerm))
+  }, [searchTerm])
+  
+
+
   useEffect(() => {
     fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
     /*we call this func and it returns a promise succesfull return .then()*/

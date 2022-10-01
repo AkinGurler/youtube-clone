@@ -1,11 +1,15 @@
 
 const initialState = {
+   
     videosBycategory: [],
     videoDetails:[],
     suggestedVideos:[],
+    channelDetails:[],
+    channelVideos:[],
+    searchVideos:[],
 }
 
-export const videoReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
         case "GET_VIDEOS_BY_CATEGORY":
             return {
@@ -19,8 +23,25 @@ export const videoReducer = (state = initialState, action) => {
             return {
                 ...state,suggestedVideos:action.payload
             }
+        case "GET_SEARCH_VIDEOS":
+            return{ 
+                ...state,searchVideos:action.payload
+            }
+
+        case "GET_CHANNEL_DETAILS":
+            return{
+                ...state,channelDetails:action.payload
+            }
+        case "GET_CHANNEL_VIDEOS":
+            return{
+                ...state,channelVideos:action.payload
+            }
+        
+
         default:
             return state
     }
 
 }
+
+export default reducer;
