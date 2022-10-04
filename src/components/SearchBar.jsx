@@ -21,6 +21,7 @@ const SearchBar = () => {
     <Paper component="form"
     onSubmit={handleSubmit}
     sx={{
+        
         borderRadius:20,
         border:"1px solid #e3e3e3",
         pl:2,      //padding left//
@@ -33,6 +34,7 @@ const SearchBar = () => {
         placeholder="Watch.."
         value={search}
         onChange={handleSearch}
+        
        />
        <IconButton type="submit" sx={{
         p:"10px",

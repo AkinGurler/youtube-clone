@@ -7,10 +7,10 @@ import { fetchFromAPI } from '../utils/fetchFromAPI'
 import { useState } from 'react'
 import { getVideosByCategory } from '../actions/video'
 import {useDispatch,useSelector} from "react-redux"
+import reducer, { initialState } from '../reducers/videos'
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New")
-
   const videos=useSelector((state)=>state.videosBycategory)
   const dispatch=useDispatch()
 
