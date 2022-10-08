@@ -5,38 +5,47 @@ import { Link, useParams } from "react-router-dom"
 import { demoProfilePicture } from '../utils/constants';
 import { borderRadius } from '@mui/system';
 
-const ChannelCard = ({ channelDetail,marginTop }) =>{ 
+const ChannelCard = ({ channelDetail,marginTop,channelPage }) =>{ 
+  console.log(channelDetail)
+
+  
+
+const picture=channelDetail?.snippet?.thumbnails?.high?.url
 return (
   
   <Box sx={{
     boxShadow: "none",
     borderRadius: "20px",
     display:"flex",
-    justifyContent:"center",
+    /* justifyContent:"center", */
     alignItems:"center",
-    width:{xs:"356px",md:"320px"},
-    height:"326px",
+    width:channelPage ? {xs:"356px",md:"320px"}: "auto",
+    height:channelPage ? "326px": "40px",
     margin:"auto",
     marginTop:marginTop
   }}>
-    <Link to={`channel/${channelDetail?.id?.channelId}`}>
+    <Link to={`/channel/${channelDetail?.id}`}>
     <CardContent sx={{
       display: "flex",
-      flexDirection: "column",/////
-      justifyContent: "center",
-      textAlign: "center",
+      flexDirection:  channelPage ? "column" : "row",/////
+      justifyContent: channelPage ? "center" : "space-between",
+      gap:channelPage ? "0px": "10px" ,
+    /*   textAlign: "center", */
       color: "#fff"
     }}>
       <CardMedia
-        image={channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture}
+        image={picture}
         alt={channelDetail?.snippet?.title}
-        sx={{
+        sx={{ 
           borderRadius: "50%",
-          height: "180px", width: "180px",
+          height: channelPage ?  "180px" : "45px" ,
+          width:  channelPage ?  "180px" : "45px" ,
           mb:2,border:"1px solid #e3e3e3"
         }}
       />
-      <Typography varian="h6">
+      
+     <Box>
+       <Typography varian="h6">
         {channelDetail?.snippet?.title}
       </Typography>
       {channelDetail?.statistics?.subscriberCount && (
@@ -45,6 +54,8 @@ return (
           subscriberCount).toLocaleString()} Subscribers
         </Typography>
       )}
+     </Box>
+     
 
     </CardContent>
     </Link>

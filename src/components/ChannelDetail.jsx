@@ -10,6 +10,7 @@ import { getChannelDetails, getChannelVideos } from '../actions/channel'
 const ChannelDetail = () => {
   /* const [channelDetail, setChannelDetail] = useState(null) */
  
+  
   const {id}=useParams()
   const dispatch=useDispatch()
   const channelDetail=useSelector((state)=>state.channelDetails)
@@ -21,21 +22,6 @@ const ChannelDetail = () => {
   }, [id])
   
 
- 
-
-  
-/* 
-  useEffect(() => { 
-    const fetchResults=async()=>{
-  
-  
-      const channelVideos=await fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`)
-      setVideos(channelVideos.items)
-    }
-    fetchResults()
-  }, [id])
-  
- */
   return (
     <Box minHeight="95vh">
       <Box>
@@ -46,7 +32,7 @@ const ChannelDetail = () => {
           height:"300px"
         }}/>
         //we send css info for this situation
-        <ChannelCard channelDetail={channelDetail} marginTop="-93px">
+        <ChannelCard channelDetail={channelDetail} marginTop="-93px" channelPage>
         </ChannelCard>
         </Box>
         <Box p={2} display="flex">

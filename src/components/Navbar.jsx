@@ -12,6 +12,7 @@ const Navbar = () => {
     <Stack direction="row" alignItems="center" p={2}
       sx={{
         position: "sticky", //standing on screen//
+        zIndex:1,
         flexDirection:{xs:"column",md:"row"},
         background: "#000",
         top: 0,
