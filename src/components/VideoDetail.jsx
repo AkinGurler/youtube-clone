@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link, useParams } from "react-router-dom"
 import ReactPlayer from "react-player"
 import { Typography, Box, Stack } from "@mui/material"
 import { Videos } from "./"
-import { fetchFromAPI } from '../utils/fetchFromAPI'
+
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { getSuggestedVideos, getVideoDetail } from '../actions/video'
 import {useDispatch,useSelector} from "react-redux"
 import { getChannelDetails } from '../actions/channel'
 import {ChannelCard} from './'
+import Comments from './Comments'
+
 
 
 
@@ -21,16 +23,16 @@ const VideoDetail = () => {
   const channelDetails=useSelector((state)=>state.channelDetails)
 
 
- 
+
   useEffect(() => {
     dispatch(getVideoDetail(id))
     dispatch(getSuggestedVideos(id))
   
-  }, [id])
+  },[id])
   
 
   if (!videoDetail?.snippet) return "Loading..."
-  const { snippet: { channelTitle, title, channelId }, statistics: { likeCount, viewCount, commentCount } } = videoDetail
+  const { snippet: { /* channelTitle */ title, channelId }, statistics: { likeCount, viewCount, /* commentCount */ } } = videoDetail
 
  
   dispatch(getChannelDetails(channelId))
@@ -59,10 +61,10 @@ const VideoDetail = () => {
             <Stack direction={"row"} justifyContent={"space-between"} alignItems="center">
               <Link to={`/channel/${channelId}`} >
                 
-                <Typography  border={1} color="gray" p={2}>
+              {/*   <Typography  border={1} color="gray" p={2}> */}
                   
                 <ChannelCard marginTop={"15px"} channelDetail={channelDetails} />
-                </Typography>
+              {/*   </Typography> */}
               </Link>
               <Stack color="white" direction="row" alignItems="center" gap={2}>
                 <ThumbUpIcon />
@@ -75,8 +77,14 @@ const VideoDetail = () => {
                 </Typography>
 
               </Stack>
-
             </Stack>
+            {/* -------Comment Started -------------*/}
+            <Box>
+
+            <Comments  id={id}/>
+            </Box>  
+
+
           </Box>
         </Box>
         {/* -------------------Video and Deteils Finished------------------------ */}
@@ -87,7 +95,7 @@ const VideoDetail = () => {
         {/* ------------------Suggestion Videos END--------------------- */}
       </Stack>
       {/*------------------------- Video And Suggestion Videos END----------------*/}
-
+     
     </Box>
   )
 }

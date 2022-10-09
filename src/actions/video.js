@@ -36,7 +36,7 @@ export const getSuggestedVideos = id => async (dispatch) => {
     try {
         const data = await fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
         const videos = data.items
-        console.log(videos)
+        
         dispatch({
             type: "SUGGESTED_VIDEOS", payload: videos
         })
@@ -50,7 +50,7 @@ export const getSuggestedVideos = id => async (dispatch) => {
 export const getSearchVideos = search => async (dispatch) => {
     try {
         const data = await fetchFromAPI(`search?q=${search}&part=snippet`)
-        console.log(data)
+        
         dispatch({
             type: "GET_SEARCH_VIDEOS", payload: data.items
         })

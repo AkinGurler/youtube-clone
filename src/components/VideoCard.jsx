@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from "react-router-dom" //for see video detail
 import { Typography, Button, Card, CardContent, CardMedia } from "@mui/material"
-import { demoThumbnailUrl, demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle } from "../utils/constants";
-import { useDispatch, useSelector } from 'react-redux';
+import {  demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle } from "../utils/constants";
+/* import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getChannelDetails } from '../actions/channel';
-import ChannelCard from './ChannelCard';
+import ChannelCard from './ChannelCard'; */
 
 
 
 
 const VideoCard = ({ video: { id: { videoId }, snippet } }) => { //video/id/videoId
-    console.log(snippet)
+
 
     
     const channelId = snippet?.channelId

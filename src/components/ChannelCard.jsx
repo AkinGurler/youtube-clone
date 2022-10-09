@@ -1,13 +1,12 @@
 import React from 'react'
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
-import { CheckCircle } from '@mui/icons-material';
-import { Link, useParams } from "react-router-dom"
-import { demoProfilePicture } from '../utils/constants';
-import { borderRadius } from '@mui/system';
+import { Link} from "react-router-dom"
+
 
 const ChannelCard = ({ channelDetail,marginTop,channelPage }) =>{ 
-  console.log(channelDetail)
 
+
+  
   
 
 const picture=channelDetail?.snippet?.thumbnails?.high?.url
@@ -17,7 +16,7 @@ return (
     boxShadow: "none",
     borderRadius: "20px",
     display:"flex",
-    /* justifyContent:"center", */
+    justifyContent: channelPage ? "center": "",
     alignItems:"center",
     width:channelPage ? {xs:"356px",md:"320px"}: "auto",
     height:channelPage ? "326px": "40px",
@@ -50,8 +49,8 @@ return (
       </Typography>
       {channelDetail?.statistics?.subscriberCount && (
         <Typography>
-          {parseInt(channelDetail?.statistics?.
-          subscriberCount).toLocaleString()} Subscribers
+          {parseInt(channelDetail?.statistics?.subscriberCount).toLocaleString()} 
+          Subscribers
         </Typography>
       )}
      </Box>
