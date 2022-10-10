@@ -7,6 +7,7 @@ export const initialState = {
     channelDetails:[],
     channelVideos:[],
     searchVideos:[],
+    videoComments:[]
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,10 @@ const reducer = (state = initialState, action) => {
         case "GET_CHANNEL_VIDEOS":
             return{
                 ...state,channelVideos:action.payload
+            }
+        case "GET_ALL_COMMENTS":
+            return{
+                ...state,videoComments:action.payload
             }
         
 
