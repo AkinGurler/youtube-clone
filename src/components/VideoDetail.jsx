@@ -18,25 +18,23 @@ import Comments from './Comments'
 const VideoDetail = () => {
   const { id } = useParams();
   const dispatch=useDispatch();
-  const videoDetail=useSelector((state)=>state.videoDetails)
-  const videos=useSelector((state)=>state.suggestedVideos)
   const channelDetails=useSelector((state)=>state.channelDetails)
+  const video=useSelector((state)=>state.video)
 
-
+  
 
   useEffect(() => {
-    dispatch(getVideoDetail(id))
-    dispatch(getSuggestedVideos(id))
-  
+    console.log("useEffect çalıştı")
+    Promise.resolve(dispatch(getVideoDetail(id)))
+    .then(()=>dispatch(getChannelDetails(channelId)))
   },[id])
   
 
-  if (!videoDetail?.snippet) return "Loading..."
-  const { snippet: { /* channelTitle */ title, channelId }, statistics: { likeCount, viewCount, /* commentCount */ } } = videoDetail
+  if (!video?.videoDetail.snippet) return "Loading..."
+  const { snippet: { /* channelTitle */ title, channelId }, statistics: { likeCount, viewCount, /* commentCount */ } } = video.videoDetail
 
  
-  dispatch(getChannelDetails(channelId))
-  
+ 
   
   
  
@@ -81,7 +79,7 @@ const VideoDetail = () => {
             {/* -------Comment Started -------------*/}
             <Box>
 
-            <Comments  id={id}/>
+            <Comments  comments={video.comments} />
             </Box>  
 
 
@@ -90,7 +88,7 @@ const VideoDetail = () => {
         {/* -------------------Video and Deteils Finished------------------------ */}
         {/* ------------------Suggestion Videos Start--------------------- */}
         <Box px={2} py={{md:1,xs:5}} justifyContent="center" alignItems={"center"}>
-          <Videos videos={videos} direction="column" />
+          <Videos videos={video.suggestedVideos} direction="column" />
         </Box>
         {/* ------------------Suggestion Videos END--------------------- */}
       </Stack>

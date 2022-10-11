@@ -18,13 +18,29 @@ export const getVideosByCategory = category => async (dispatch) => {
 
 
 
-export const getVideoDetail = id => async (dispatch) => {
+export const getVideoDetail = (id) => async (dispatch) => {
     try {
-        const data = await fetchFromAPI(`videos?part=snippet&id=${id}`)
+        console.log("getVideoDetail çalıştı")
 
-        const videoDetail = data.items[0]
+       
+        const videoData = await fetchFromAPI(`videos?part=snippet&id=${id}`)
+        const data = await fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
+        const {items}=await fetchFromAPI(`commentThreads?part=snippet&videoId=${id}`)
+        
+        const suggestedVideos = data.items
+        const videoDetail = videoData.items[0]
+        const payload={
+            suggestedVideos,
+            videoDetail,
+            comments:items
+        }
+        
+        
+       
+        console.log(payload)
+
         dispatch({
-            type: "VIDEO_DETAIL", payload: videoDetail
+            type: "VIDEO_DETAIL", payload: payload
         })
 
     } catch (error) {

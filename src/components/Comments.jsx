@@ -5,14 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllComments } from '../actions/comments'
 import { CommentCard } from "./CommentCard"
 
-const Comments = ({id}) => {
-    const comments=useSelector((state)=>state.videoComments)
-    const dispatch=useDispatch()
-    useEffect(() => {
-        dispatch(getAllComments(id))
-    }, [id])
-    
-    console.log(comments)
+
+const Comments = ({comments}) => {
 
     if(!comments.length) return "Loading..."
   return (
