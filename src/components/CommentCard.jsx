@@ -18,7 +18,7 @@ export const CommentCard = ({ comment }) => {
 
             <CardContent >
                 <Stack>
-                <Typography variant="h5" color={"#f2f2f2"} weight={"bold"} > {authorDisplayName}</Typography>
+                <Typography variant="h6" color={"#f2f2f2"} weight={"bold"} > {authorDisplayName}</Typography>
                 <Typography  color={"#d3d3d3"}> {textOriginal}   </Typography>
                 </Stack>
                  

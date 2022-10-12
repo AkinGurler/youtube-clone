@@ -18,22 +18,21 @@ import Comments from './Comments'
 const VideoDetail = () => {
   const { id } = useParams();
   const dispatch=useDispatch();
-  const channelDetails=useSelector((state)=>state.channelDetails)
-  const video=useSelector((state)=>state.video)
-
   
+  const video=useSelector((state)=>state.video)
+  const channelDetails=video.channel
 
   useEffect(() => {
-    console.log("useEffect çalıştı")
-    Promise.resolve(dispatch(getVideoDetail(id)))
-    .then(()=>dispatch(getChannelDetails(channelId)))
+    dispatch(getVideoDetail(id))
   },[id])
-  
-
-  if (!video?.videoDetail.snippet) return "Loading..."
-  const { snippet: { /* channelTitle */ title, channelId }, statistics: { likeCount, viewCount, /* commentCount */ } } = video.videoDetail
 
  
+  
+  if (!video?.videoDetail.snippet) return "Loading..."
+  const { snippet: { /* channelTitle */ title, channelId }, statistics: { likeCount, viewCount, /* commentCount */ } } = video.videoDetail
+  
+  
+  
  
   
   
@@ -81,8 +80,6 @@ const VideoDetail = () => {
 
             <Comments  comments={video.comments} />
             </Box>  
-
-
           </Box>
         </Box>
         {/* -------------------Video and Deteils Finished------------------------ */}

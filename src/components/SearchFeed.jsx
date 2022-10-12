@@ -22,14 +22,14 @@ const Feed = () => {
     dispatch(getSearchVideos(searchTerm))
   }, [searchTerm])
   
-
-
-  useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
-    /*we call this func and it returns a promise succesfull return .then()*/
+/*we call this func and it returns a promise succesfull return .then()*/
     /* we cant say const data because it returns promise */
+
+/*   useEffect(() => {
+    fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
+    
       .then((data)=>setVideos(data.items))
-  }, [])
+  }, []) */
   
   return (
    

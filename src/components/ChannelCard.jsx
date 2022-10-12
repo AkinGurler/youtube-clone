@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link} from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux';
+import { getChannelDetails } from '../actions/channel';
 
 
 const ChannelCard = ({ channelDetail,marginTop,channelPage }) =>{ 
 
-
-  
-  
 
 const picture=channelDetail?.snippet?.thumbnails?.high?.url
 return (
@@ -49,8 +48,8 @@ return (
       </Typography>
       {channelDetail?.statistics?.subscriberCount && (
         <Typography>
-          {parseInt(channelDetail?.statistics?.subscriberCount).toLocaleString()} 
-          Subscribers
+          {parseInt(channelDetail?.statistics?.subscriberCount).toLocaleString()} Subs
+           
         </Typography>
       )}
      </Box>

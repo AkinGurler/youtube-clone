@@ -3,12 +3,16 @@ import { fetchFromAPI } from "../utils/fetchFromAPI"
 
 export const getChannelDetails = id => async (dispatch) => {
     try {
-        const data = await fetchFromAPI(`channels?part=snippet&id=${id}`)
-        const channelDetail=data.items[0]
+        const detailData = await fetchFromAPI(`channels?part=snippet&id=${id}`)
+        const videoData= await fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`)
+        const payload={
+            details:detailData.items[0],
+            videos:videoData.items
+        }
         
         
         dispatch({
-            type: "GET_CHANNEL_DETAILS", payload:channelDetail
+            type: "GET_CHANNEL", payload:payload
         })
     } catch (error) {
         console.log(error)
@@ -16,14 +20,3 @@ export const getChannelDetails = id => async (dispatch) => {
 }
 
 
-export const getChannelVideos=id=>async (dispatch)=>{
-    try {
-        const data= await fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`)
-        dispatch({
-            type: "GET_CHANNEL_VIDEOS", payload:data.items
-        })
-        
-    } catch (error) {
-       console.log(error) 
-    }
-}

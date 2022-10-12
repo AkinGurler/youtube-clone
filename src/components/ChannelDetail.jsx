@@ -13,12 +13,13 @@ const ChannelDetail = () => {
   
   const {id}=useParams()
   const dispatch=useDispatch()
-  const channelDetail=useSelector((state)=>state.channelDetails)
-  const videos=useSelector((state)=>state.channelVideos)
+  const channel=useSelector((state)=>state.channel)
+  const videos=channel.videos
+  const channelDetail=channel.details
 
   useEffect(() => {
     dispatch(getChannelDetails(id))
-    dispatch(getChannelVideos(id))
+   
   }, [id])
   
 

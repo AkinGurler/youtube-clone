@@ -2,9 +2,8 @@
 export const initialState = {
    
     videosBycategory: [],
-    video:{videoDetail:[],suggestedVideos:[],comments:[]},
-    channelDetails:[], /* Channel v'deos- */
-    channelVideos:[],
+    video:{videoDetail:[],suggestedVideos:[],comments:[],channel:[]},
+    channel:{details:[],videos:[]}, 
     searchVideos:[],
     
 }
@@ -24,17 +23,11 @@ const reducer = (state = initialState, action) => {
             return{ 
                 ...state,searchVideos:action.payload
             }
-
-        case "GET_CHANNEL_DETAILS":
+        case "GET_CHANNEL":
             return{
-                ...state,channelDetails:action.payload
+                ...state,channel:action.payload
             }
-        case "GET_CHANNEL_VIDEOS":
-            return{
-                ...state,channelVideos:action.payload
-            }
-        
-        
+    
 
         default:
             return state
