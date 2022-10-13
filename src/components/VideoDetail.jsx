@@ -1,47 +1,49 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from "react-router-dom"
 import ReactPlayer from "react-player"
-import { Typography, Box, Stack } from "@mui/material"
+import { Typography, Box, Stack, Button } from "@mui/material"
 import { Videos } from "./"
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { getSuggestedVideos, getVideoDetail } from '../actions/video'
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getChannelDetails } from '../actions/channel'
-import {ChannelCard} from './'
+import { ChannelCard } from './'
 import Comments from './Comments'
+import Pagination from '@mui/material/Pagination'
 
 
 
 
 const VideoDetail = () => {
+  const [openComments, setOpenComments] = useState(false)
   const { id } = useParams();
-  const dispatch=useDispatch();
-  
-  const video=useSelector((state)=>state.video)
-  const channelDetails=video.channel
+  const dispatch = useDispatch();
+
+  const video = useSelector((state) => state.video)
+  const channelDetails = video.channel
 
   useEffect(() => {
     dispatch(getVideoDetail(id))
-  },[id])
+  }, [id])
 
- 
-  
+
+
   if (!video?.videoDetail.snippet) return "Loading..."
   const { snippet: { /* channelTitle */ title, channelId }, statistics: { likeCount, viewCount, /* commentCount */ } } = video.videoDetail
-  
-  
-  
- 
-  
-  
- 
+
+
+
+
+
+
+
 
   return (
     <Box minHeight="100vh">
       {/*------------------------- Video And Suggestion Videos Started----------------*/}
-      <Stack direction={{xs:"column",md:"row"}} sx={{overflow: "auto",}}>
+      <Stack direction={{ xs: "column", md: "row" }} sx={{ overflow: "auto", }}>
 
         {/* -------------------Video and Deteils Started------------------------ */}
         <Box flex={1}>
@@ -57,11 +59,11 @@ const VideoDetail = () => {
             </Typography>
             <Stack direction={"row"} justifyContent={"space-between"} alignItems="center">
               <Link to={`/channel/${channelId}`} >
-                
-              {/*   <Typography  border={1} color="gray" p={2}> */}
-                  
+
+                {/*   <Typography  border={1} color="gray" p={2}> */}
+
                 <ChannelCard marginTop={"15px"} channelDetail={channelDetails} />
-              {/*   </Typography> */}
+                {/*   </Typography> */}
               </Link>
               <Stack color="white" direction="row" alignItems="center" gap={2}>
                 <ThumbUpIcon />
@@ -76,21 +78,25 @@ const VideoDetail = () => {
               </Stack>
             </Stack>
             {/* -------Comment Started -------------*/}
-            <Box>
-
-            <Comments  comments={video.comments} />
-            </Box>  
+            <Box marginTop={2}>
+              <Button onClick={() =>openComments == true ? setOpenComments(false):setOpenComments(true)}>Comments</Button>
+              { openComments  && (
+                
+                  <Comments comments={video.comments} />
+                  
+            )}
+            </Box>
           </Box>
         </Box>
         {/* -------------------Video and Deteils Finished------------------------ */}
         {/* ------------------Suggestion Videos Start--------------------- */}
-        <Box px={2} py={{md:1,xs:5}} justifyContent="center" alignItems={"center"}>
+        <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems={"center"}>
           <Videos videos={video.suggestedVideos} direction="column" />
         </Box>
         {/* ------------------Suggestion Videos END--------------------- */}
       </Stack>
       {/*------------------------- Video And Suggestion Videos END----------------*/}
-     
+
     </Box>
   )
 }

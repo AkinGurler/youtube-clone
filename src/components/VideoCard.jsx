@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom" //for see video detail
 import { Typography, Button, Card, CardContent, CardMedia } from "@mui/material"
-import {  demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle } from "../utils/constants";
+import { demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle } from "../utils/constants";
+import { Box } from '@mui/system';
 /* import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getChannelDetails } from '../actions/channel';
@@ -11,23 +12,9 @@ import ChannelCard from './ChannelCard'; */
 
 
 const VideoCard = ({ video: { id: { videoId }, snippet } }) => { //video/id/videoId
+    console.log("videocard",snippet)
 
-
-    
     const channelId = snippet?.channelId
-    /* const dispatch = useDispatch()
-    const channelDetails=useSelector((state)=>state.channelDetails)
-    console.log(channelDetails)
-    
-    console.log(channelId)
-
-    useEffect(() => {
-        channelId && dispatch(getChannelDetails(channelId))
-    }, [])
- */
-
-  
-    
     return (
         <Card sx={{
             width: { xs: "100%", sm: "358px", md: "320px" },
@@ -48,15 +35,14 @@ const VideoCard = ({ video: { id: { videoId }, snippet } }) => { //video/id/vide
                         {snippet?.title.slice(0, 60) || demoVideoTitle.slice(0, 60)}
                     </Typography>
                 </Link>
-                <Link to={channelId ? `/channel/${channelId}` : demoChannelUrl}>
-                    <Button sx={{ marginY: 1 }} variant="outlined" color="error">
+
+                <Box marginTop={1}>
+                    <Link to={channelId ? `/channel/${channelId}` : demoChannelUrl}>
                         <Typography variant="subtitle2" fontWeight="bold" color="gray">
                             {snippet?.channelTitle.slice(0, 60) || demoChannelTitle.slice(0, 60)}
                         </Typography>
-                        
-                    </Button>
-
-                </Link>
+                    </Link>
+                </Box>
             </CardContent>
         </Card>
     )

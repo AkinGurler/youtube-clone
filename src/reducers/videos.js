@@ -17,7 +17,6 @@ const reducer = (state = initialState, action) => {
         case "VIDEO_DETAIL":
             return {
                 ...state,video:action.payload
-                
             }
         case "GET_SEARCH_VIDEOS":
             return{ 
@@ -28,7 +27,6 @@ const reducer = (state = initialState, action) => {
                 ...state,channel:action.payload
             }
     
-
         default:
             return state
     }
