@@ -6,7 +6,6 @@
 * Watch an video
 * View videos in category
 * View channels and videos
-* 
 ![youtube-clone](https://user-images.githubusercontent.com/99674716/219394738-5907a147-2643-4649-a28f-1914ee321720.gif)
 
 ## Live Demo
