@@ -21,7 +21,7 @@ I used api's from [Rapid Api](https://rapidapi.com/)
 
 ## Installation 
 
-* Git clone https://github.com/AkinGurler/WebFitness.git
+* https://github.com/AkinGurler/youtube-clone.git
 * in project
 ```bash 
   npm install 
